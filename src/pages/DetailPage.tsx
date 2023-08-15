@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from '@emotion/styled';
-import DetailHotelIntro from './DetailHotelIntro';
-import DivisionLine from './DivisionLine';
-import DetailRoomPrice from './DetailRoomPrice';
-import DetailReview from './DetailReview';
-import DetailSideBar from './DetailSideBar';
-import Header from './Header';
+import DetailHotelIntro from '../components/DetailHotelIntro';
+import DivisionLine from '../components/DivisionLine';
+import DetailRoomPrice from '../components/DetailRoomPrice';
+import DetailReview from '../components/DetailReview';
+import DetailSideBar from '../components/DetailSideBar';
+import Header from '../components/Header';
 
 const Base = styled.div`
 `;
