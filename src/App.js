@@ -1,7 +1,7 @@
 import { RecoilRoot } from "recoil";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DetailPage from './components/DetailPage.tsx';
-import MyPage from './components/MyPage.tsx';
+import MyPage from './pages/MyPage.js';
 
 function App() {
   return (

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../atoms/userAtom';
-import MyPageCalendar from './MyPageCalendar';
-import MyPagePickedHotel from './MyPagePickedHotel';
-import DivisionLine from './DivisionLine';
-import MyPageMyReview from './MyPageMyReview';
-import Header from './Header';
+import MyPageCalendar from '../components/MyPageCalendar';
+import MyPagePickedHotel from '../components/MyPagePickedHotel';
+import DivisionLine from '../components/DivisionLine';
+import MyPageMyReview from '../components/MyPageMyReview';
+import Header from '../components/Header';
 
 const Base = styled.div`
   
