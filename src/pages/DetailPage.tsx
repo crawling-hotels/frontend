@@ -16,16 +16,24 @@ const Body = styled.div`
   width: 1200px;
   margin: 0 auto;
   display: flex;
-  position: relative;
+  /* position: relative; */
 `;
 
 const Content = styled.div`
   width: 900px;
+  /* background-color: bisque; */
+
+  & section h3 {
+    margin-top: 0;
+  }
 `;
 
-const SideBar = styled.div`
+const SideBar = styled.aside`
   margin-left: 70px;
   width: 230px;
+  height: fit-content;
+  position: sticky;
+  top: 40px;
   /* background-color: bisque; */
 `;
 
@@ -38,10 +46,10 @@ const DetailPage = () => {
       <Header />
       <Body>
         <Content>
-          <section>
+          {/* <section>
             <DetailHotelIntro />
-          </section>
-          <DivisionLine />
+          </section> */}
+          {/* <DivisionLine /> */}
           <section>
             <h3>기간 내 객실 가격</h3>
             <DetailRoomPrice />
