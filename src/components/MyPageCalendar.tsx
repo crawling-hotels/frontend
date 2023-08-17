@@ -6,12 +6,14 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import koLocale from '@fullcalendar/core/locales/ko';
 
 const Base = styled.div`
-  width: 100%;
+  /* width: 100%; */
+  height: 100%;
   /* background-color: aliceblue; */
 `;
 
 const CalendarContainer = styled.div`
-  width: 100%;
+  /* width: 100%; */
+  height: 100%;
 `;
 
 const MyPageCalendar: React.FC = () => {

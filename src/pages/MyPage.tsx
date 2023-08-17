@@ -26,34 +26,49 @@ const Body = styled.div`
   }
 `;
 
-const Profile = styled.div`
-  width: 230px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* background-color: #E1DFDF; */
-  /* border: 2px solid #E1DFDF; */
-  /* border-radius: 20px; */
-  padding: 10px;
+
+const NavigationContainer = styled.div`
+  width: 249px;
+  height: fit-content;
+  border: 1px solid #d1d1d1;
+  border-radius: 20px;
+  /* background-color: white; */
+  padding: 20px;
+
+  & h1 {
+    color: #757575;
+    font-size: 17px;
+    margin: 0;
+    margin-bottom: 15px;
+  }
 `;
 
-const ProfileImage = styled.img`
-  width: 100px;
-  border-radius: 50%;
+const Navigation = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const NavItem = styled.li<{ isSelected: boolean }>`
+  font-size: 17px;
+  font-weight: bold;
+  color: ${({ isSelected }) => isSelected ? "#3D66E0" : "#757575"};
+  padding: 13px 5px;
+  background-color: ${({ isSelected }) => isSelected ? "aliceblue" : ""};
+  margin: 10px 0;
+  cursor: pointer;
 `;
 
 const Content = styled.div`
   /* background-color: greenyellow; */
   width: 900px;
+  height: calc(100vh - 100px - 40px);
   margin-left: 50px;
 `;
 
 const MyPage: React.FC = () => {
   const user = useRecoilValue(userState);
-  const [userEmail, setUserEmail] = useState("");
-  const [userPhotoUrl, setUserPhotoUrl] = useState("");
+  const [curContentId, setCurContentId] = useState(0);
 
   useEffect(() => {
     //찜한 숙소 데이터 가져오기
@@ -61,43 +76,42 @@ const MyPage: React.FC = () => {
     //내 게시글 데이터 가져오기
   }, []);
 
-  useEffect(() => {
-    if (user !== null) {
-      const userData = JSON.parse(user);
-      setUserEmail(userData.email);
-      setUserPhotoUrl(userData.photoURL);
+  const contents = [
+    {
+      title: "내 일정",
+      component: <MyPageCalendar />
+    },
+    {
+      title: "찜한 숙소",
+      component: <MyPagePickedHotel />
+    },
+    {
+      title: "내 게시글",
+      component: <MyPageMyReview />
     }
-  }, [user]);
+  ];
+
 
   return (
     <Base>
       <Header />
       <Body>
-        <Profile>
-          <ProfileImage src={userPhotoUrl} alt='userPhoto'/>
-          <p>{userEmail}</p>
-        </Profile>
+        <NavigationContainer>
+          <h1>{`${user}님의`}<br/>마이페이지</h1>
+          <Navigation>
+            {
+              contents.map((val,idx) => (
+                <NavItem
+                  isSelected={idx===curContentId} 
+                  onClick={() => setCurContentId(idx)}>
+                  {val.title}
+                </NavItem>
+              ))
+            }
+          </Navigation>
+        </NavigationContainer>
         <Content>
-
-          <section>
-            <h1>내 일정</h1>
-            <MyPageCalendar />
-          </section>
-
-          <DivisionLine />
-
-          <section>
-            <h1>찜한 숙소</h1>
-            <MyPagePickedHotel />
-          </section>
-
-          <DivisionLine />
-
-          <section>
-            <h1>내 게시글</h1>
-            <MyPageMyReview />
-          </section>
-
+          {contents[curContentId].component}
         </Content>
       </Body>
     </Base>

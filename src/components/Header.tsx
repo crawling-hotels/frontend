@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useRecoilState } from 'recoil';
-import { signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, User, setPersistence, browserSessionPersistence } from 'firebase/auth';
-import { auth, provider } from '../firebase';
 import { userState } from '../atoms/userAtom';
 
 
@@ -52,62 +50,23 @@ const NavItem = styled.div`
 `;
 
 const Header: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
   const [signInState, setSignInState] = useState(false);
   
-  const sessionUserData = () => {
-    for (const key of Object.keys(sessionStorage)) {
-      if (key.includes('firebase:authUser:')) {
-        return sessionStorage.getItem(key);
-      }
-    }
-  }
 
   useEffect(() => {
-    const userData = sessionUserData();
-    if (userData){
+    if (sessionStorage.getItem('user')) {
       setSignInState(true);
-      console.log(signInState);
-      setUser(userData);
-      console.log(user);
-    }//왜안되는지 모르겠지만 안됨
+      setUser(sessionStorage.getItem('user'));
+    }
   }, []);//처음 렌더링될 때 세션에 로그인되어있는지 확인
 
-  auth.onAuthStateChanged(() => {
-
-  })
-
-  const signIn_fb = () => {//로그인(로그아웃 상태)
-
-    setPersistence(auth, browserSessionPersistence)
-      .then(() => {
-        return signInWithPopup(auth, provider)
-      })
-      .then((result)=> {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential!.accessToken;
-        
-        // The signed-in user info.
-        const user = result.user;
-        setUser(JSON.stringify(user));
-        setSignInState(true);
-        
-      }).catch((error) => {
-        console.log(error);
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        
-      });
-  }
 
   const signOut_fb = () => {//로그아웃(로그인 상태)
-    signOut(auth).then(() => {
-      setUser(null);
-      setSignInState(false);
-    }).catch((error) => {
-      console.log(error);
-    })
+    sessionStorage.removeItem('user');
+    setUser(null);
+    setSignInState(false);
   }
 
   const linkStyle = {
@@ -124,13 +83,13 @@ const Header: React.FC = () => {
           signInState ? (
             <Nav>
                 <NavItem><Link to={"/"} style={linkStyle}>리뷰 등록</Link></NavItem>
-                <NavItem><Link to={"/MyPage"} style={linkStyle}>마이페이지</Link></NavItem>
+                <NavItem><Link to={"/mypage"} style={linkStyle}>마이페이지</Link></NavItem>
                 <NavItem onClick={signOut_fb}>로그아웃</NavItem>
             </Nav>
             
           ) : (
             <Nav>
-              <NavItem onClick={signIn_fb}>로그인</NavItem>
+              <NavItem><Link to={"/login"} style={linkStyle}>로그인</Link></NavItem>
             </Nav>
           )
         }

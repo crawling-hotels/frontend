@@ -40,7 +40,7 @@ const MyPageMyReview = () => {
           <li><MyPageReviewBlock /></li>
         </List>
       </ListContainer>
-      <MoreButton />
+      {/* <MoreButton /> */}
     </Base>
   )
 }

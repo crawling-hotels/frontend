@@ -37,7 +37,7 @@ const MyPagePickedHotel: React.FC = () => {
           <MyPagePickedHotelBlock />
           <MyPagePickedHotelBlock />
         </List>
-        <MoreButton />
+        {/* <MoreButton /> */}
       </Content>
       
     </Base>
