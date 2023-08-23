@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./image.css";
 import { AiOutlineCamera } from "react-icons/ai";
 
 export default function ImageUpload() {

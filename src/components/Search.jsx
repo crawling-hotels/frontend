@@ -4,7 +4,7 @@ import DatePickers from "./DatePickers";
 
 export default function Search() {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "row" }}>
       <input type="text" placeholder="위치를 입력하세요" />
       <DatePickers />
       <DatePickers />

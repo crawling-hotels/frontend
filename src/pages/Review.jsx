@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import ImageUpload from "../components/ImageUpload";
 import StartRating from "../components/StartRating";
 
